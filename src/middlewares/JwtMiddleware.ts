@@ -1,0 +1,2 @@
+import {Request,Response,NextFunction} from "express";import {MeuTokenJWT} from "../http/MeuTokenJWT";import {ErrorResponse} from "../http/ErrorResponse";
+export class JwtMiddleware { validateToken=(req:Request,_res:Response,next:NextFunction):void=>{const u=new MeuTokenJWT().validarToken(req.headers.authorization||"");if(!u)throw new ErrorResponse(401,"Token inválido ou ausente");(req as any).usuarioLogado=u;next();};}

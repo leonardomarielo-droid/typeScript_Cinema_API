@@ -1,0 +1,2 @@
+import {Request} from "express";import {ErrorResponse} from "../http/ErrorResponse";import {Usuario} from "../models/Usuario";
+export abstract class BaseController {protected body(req:Request,key:string):any{const v=req.body?.[key];if(!v||typeof v!=="object")throw new ErrorResponse(400,`Corpo inválido: ${key} é obrigatório`);return v;}protected getUsuarioLogado(req:Request):Usuario{const u=(req as any).usuarioLogado as Usuario;if(!u)throw new ErrorResponse(401,"Usuário não autenticado");return u;}}
